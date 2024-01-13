@@ -32,6 +32,19 @@ def evaluate(tree, env)
     env[tree[1]]
   when 'func_call'
     p(evaluate(tree[2], env))
+  when 'if'
+    if evaluate(tree[1], env)
+      evaluate(tree[2], env)
+    else
+      evaluate(tree[3], env)
+    end
+  when 'while'
+    case tree[0]
+    when 'while'
+      while evaluate(tree[1], env)
+        evaluate(tree[2], env)
+      end
+    end
   end
 end
 
